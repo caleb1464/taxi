@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="buttonSendEmail" type="id" />
+    <item name="buttonRateApp" type="id" />
+    <item name="buttonShareApp" type="id" />
+    <item name="buttonPrivacyPolicy" type="id" />
+    <item name="buttonTermsAndConditions" type="id" />
+    <item name="textAppVersion" type="id" />
+</resources>

@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../buildsystem/java_version.gradle'
+
+android {
+    namespace "com.vlad1m1r.bltaxi.analytics"
+    defaultConfig {
+        minSdkVersion Versions.min_sdk
+        targetSdkVersion Versions.target_sdk
+        compileSdk Versions.compile_sdk
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            testCoverageEnabled false
+        }
+    }
+
+    testOptions {
+        animationsDisabled = true
+        unitTests.all {
+            systemProperty 'robolectric.dependency.repo.url', 'https://repo1.maven.org/maven2'
+        }
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    implementation Deps.kotlin_stdlib
+
+    implementation Deps.firebase_core
+    implementation Deps.firebase_crashlytics
+    implementation Deps.firebase_analytics
+
+    implementation Deps.hilt
+    kapt Deps.hilt_compiler
+
+    testImplementation Deps.junit
+    testImplementation Deps.truth
+    testImplementation Deps.mockito_kotlin
+    testImplementation Deps.mockito_inline
+    testImplementation Deps.robolectric
+}

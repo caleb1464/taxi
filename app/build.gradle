@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'dagger.hilt.android.plugin'
+
+apply from: "$project.rootDir/buildsystem/java_version.gradle"
+
+android {
+    namespace "com.vlad1m1r.bltaxi"
+    defaultConfig {
+        applicationId "com.vlad1m1r.bltaxi"
+        minSdkVersion Versions.min_sdk
+        targetSdkVersion Versions.target_sdk
+        compileSdk Versions.compile_sdk
+        versionCode Versions.version_code
+        versionName Versions.version_name
+        setProperty("archivesBaseName", "BL Taxi-$versionName")
+
+        testOptions.unitTests.includeAndroidResources = true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            testCoverageEnabled false
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+        dataBinding = true
+    }
+
+    testOptions {
+        animationsDisabled = true
+        unitTests.all {
+            systemProperty 'robolectric.dependency.repo.url', 'https://repo1.maven.org/maven2'
+        }
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    implementation Deps.kotlin_stdlib
+    implementation Deps.kotlin_coroutines_android
+    implementation Deps.fragment
+
+    implementation Deps.hilt
+    kapt Deps.hilt_compiler
+
+    implementation project(Modules.taxi_domain)
+    implementation project(Modules.basedata)
+    implementation project(Modules.baseui)
+    implementation project(Modules.about_data)
+    implementation project(Modules.about_ui)
+    implementation project(Modules.taxi_data)
+    implementation project(Modules.taxi_ui)
+    implementation project(Modules.settings_ui)
+    implementation project(Modules.remote)
+    implementation project(Modules.local)
+    implementation project(Modules.analytics)
+    implementation project(Modules.sync)
+    implementation project(Modules.shortcuts)
+
+    testImplementation Deps.junit
+
+    testImplementation Deps.truth
+    testImplementation Deps.mockito_kotlin
+    testImplementation Deps.mockito_inline
+    testImplementation Deps.robolectric
+    testImplementation Deps.fragment_test
+    testImplementation Deps.espresso_core
+    testImplementation Deps.espresso_contrib
+    testImplementation Deps.test_core_ktx
+    testImplementation Deps.hilt_test
+
+    kaptTest Deps.databinding_compiler
+}
+apply plugin: 'com.google.gms.google-services'
+
+kapt {
+    correctErrorTypes true
+}
+
+hilt {
+    enableAggregatingTask = true
+}

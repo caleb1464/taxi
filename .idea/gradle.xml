@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
+                <projects>
+                  <project path="$PROJECT_DIR$/buildSrc" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/about" />
+            <option value="$PROJECT_DIR$/about/data" />
+            <option value="$PROJECT_DIR$/about/domain" />
+            <option value="$PROJECT_DIR$/about/ui" />
+            <option value="$PROJECT_DIR$/analytics" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/basedata" />
+            <option value="$PROJECT_DIR$/baseui" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/local" />
+            <option value="$PROJECT_DIR$/remote" />
+            <option value="$PROJECT_DIR$/settings" />
+            <option value="$PROJECT_DIR$/settings/ui" />
+            <option value="$PROJECT_DIR$/shortcuts" />
+            <option value="$PROJECT_DIR$/sync" />
+            <option value="$PROJECT_DIR$/taxi" />
+            <option value="$PROJECT_DIR$/taxi/data" />
+            <option value="$PROJECT_DIR$/taxi/domain" />
+            <option value="$PROJECT_DIR$/taxi/ui" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

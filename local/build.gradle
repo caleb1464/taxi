@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+apply from: '../buildsystem/java_version.gradle'
+
+android {
+    namespace "com.vlad1m1r.bltaxi.local"
+    defaultConfig {
+        minSdkVersion Versions.min_sdk
+        targetSdkVersion Versions.target_sdk
+        compileSdk Versions.compile_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testOptions.unitTests.includeAndroidResources = true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            testCoverageEnabled false
+        }
+    }
+
+    testOptions {
+        unitTests.all {
+            systemProperty 'robolectric.dependency.repo.url', 'https://repo1.maven.org/maven2'
+        }
+    }
+}
+
+dependencies {
+    implementation Deps.kotlin_stdlib
+    implementation Deps.kotlin_coroutines_core
+
+    implementation Deps.room_runtime
+    kapt Deps.room_compiler
+    implementation Deps.room_ktx
+    implementation Deps.room_common
+
+    implementation Deps.appcompat
+    implementation Deps.core_ktx
+    implementation Deps.preference_ktx
+
+    implementation Deps.hilt
+    kapt Deps.hilt_compiler
+
+    implementation project(Modules.taxi_domain)
+
+    testImplementation Deps.junit
+    testImplementation Deps.truth
+    testImplementation Deps.mockito_kotlin
+    testImplementation Deps.mockito_inline
+    testImplementation Deps.robolectric
+    testImplementation Deps.arch_core_testing
+}
